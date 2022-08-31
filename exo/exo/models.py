@@ -14,7 +14,7 @@ class TrackData(models.Model):
     is_done = models.BooleanField()
     latitude = models.FloatField()
     longitude = models.FloatField()
-    dateReached = models.DateTimeField(auto_now_add=True)    
+    dateReached = models.TextField()
     
     class Meta:
         ordering = ['idTracker']

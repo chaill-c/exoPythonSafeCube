@@ -1,4 +1,6 @@
-import json 
+import json
+import tracemalloc
+import requests
 
 tracks = json.loads('''[
     {"data": {"mac1": "E8:BE:81:A1:44:70", "mac2": "D8:07:B6:7F:05:FF", "type": "Wifi", "geoloc": false}, "radius": 97, "is_done": true, "latitude": 48.8112438, "longitude": 2.400947182, "date_reached": "2021-01-20 18:42"}, 
@@ -26,3 +28,52 @@ tracks = json.loads('''[
     {"data": {"mac1": "34:27:92:42:CB:A3", "mac2": "70:FC:8F:52:25:18", "type": "Wifi", "geoloc": false}, "radius": 60, "is_done": true, "latitude": 48.8124271, "longitude": 2.397505111, "date_reached": "2021-01-21 07:01"}
 ]''')
 
+url = "http://127.0.0.1:8000/trackData/"
+
+
+
+def saveData(url, tracks):
+    nblines = len(tracks)
+    
+    for i in range(0, nblines):
+        data = {
+            "idTracker": 1,
+            "dataInfo": json.dumps(tracks[i]["data"]),
+            "radius": tracks[i]["radius"],
+            "is_done": tracks[i]["is_done"],
+            "latitude": tracks[i]["latitude"],
+            "longitude": tracks[i]["longitude"],
+            "dateReached": tracks[i]["date_reached"]
+        }
+        print(data)
+        response = requests.post(url, json=data)
+        print("Status Code", response.status_code)
+        print("JSON Response ", response.json())
+
+
+def getStops():
+    x = requests.get('http://127.0.0.1:8000/getStops/')
+    print(x.text)
+
+def iterationMode(tracks):
+    nblines = len(tracks)
+    url = "http://127.0.0.1:8000/iterationMode/"
+
+    for i in range(0, nblines):
+        data = {
+            "idTracker": 2,
+            "dataInfo": json.dumps(tracks[i]["data"]),
+            "radius": tracks[i]["radius"],
+            "is_done": tracks[i]["is_done"],
+            "latitude": tracks[i]["latitude"],
+            "longitude": tracks[i]["longitude"],
+            "dateReached": tracks[i]["date_reached"]
+        }
+        print(data)
+        response = requests.post(url, json=data)
+        print("Status Code", response.status_code)
+        print("JSON Response ", response.json())
+
+saveData(url, tracks)
+getStops()
+iterationMode(tracks)

@@ -6,3 +6,5 @@ Creation DB : utilisation de sqlite livré par defaut avec Django rest Framework
 
 API running properly (1725)
 Debut scripting adding element to db (1800)
+Pause course / repas (1830)
+Debut realisation algo (2100)
