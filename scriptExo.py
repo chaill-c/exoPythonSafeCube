@@ -59,30 +59,7 @@ def getStops():
     x = requests.get('http://127.0.0.1:8000/getStops/1/')
     print(x.text)
     print(x.status_code)
-    # df = pd.read_json(x.text)
-    # coords = df[['latitude', 'longitude']].to_numpy()
-    # kms_per_radian = 6371.0088
-    # epsilon = 0.05 / kms_per_radian
-    # db = DBSCAN(eps=epsilon, min_samples=1, algorithm='ball_tree', metric='haversine').fit(np.radians(coords))
-    # cluster_labels = db.labels_
-    # num_clusters = len(set(cluster_labels))
-    # clusters = pd.Series([coords[cluster_labels == n] for n in range(num_clusters)])
-    # for i in range(0, num_clusters-1):
-    #     nblines = len(clusters[i])
-    #     if nblines > 1:
-    #         checkDF = pd.DataFrame()
-    #         for j in range(0, nblines-1):
-    #             checkDF = checkDF.append(df[(df['latitude']==clusters[i][j][0]) & (df['longitude']==clusters[i][j][1])])
-    #         checkDF.sort_values(by='dateReached', inplace=True)
-    #         checkDFSize = len(checkDF)
-    #         date1 = datetime.datetime.strptime(checkDF.iloc[checkDFSize-1]['dateReached'], '%Y-%m-%d %H:%M')
-    #         date1 = datetime.datetime.timestamp(date1)
-    #         date2 = datetime.datetime.strptime(checkDF.iloc[0]['dateReached'], '%Y-%m-%d %H:%M')
-    #         date2 = datetime.datetime.timestamp(date2)
-    #         tpsMin = (date1-date2)/60
-    #         if tpsMin > 60:
-    #             print('stop on this cluster : ')
-    #             print(checkDF)
+
 
 def iterationMode(tracks):
     nblines = len(tracks)
